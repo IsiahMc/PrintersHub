@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Z-hop – Join the Waitlist</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <img src="printer.jpg" alt="3DPrintHub preview" class="hero-img" />
+      <div class="overlay">
+        <h1>Z-Hop</h1>
+        <p>The community powered platform for on demand 3D printing.<br/>
+      Get help, share feedback, and find someone to print your project.</p>
+      <form id="waitlist-form" action="https://api.web3forms.com/submit" method="POST">
+
+    <!-- Replace with your Access Key -->
+    <input type="hidden" name="access_key" value="28a57de8-7203-4828-a37b-27f2d293a20c">
+
+    <!-- Form Inputs. Each input must have a name="" attribute -->
+    <input id="email" type="email" name="email" required placeholder="Enter your email">
+
+    <!-- Honeypot Spam Protection -->
+    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+    <!-- Custom Confirmation / Success Page -->
+    <!-- <input type="hidden" name="redirect" value="https://mywebsite.com/thanks.html"> -->
+
+    <button type="submit">Join the Waitlist</button>
+
+</form>
+        <p id="success-message" class="hidden">You're on the list. Stay tuned!</p>
+
+      </div>
+    </section>
+
+<section class="features">
+  <h2>What We're Building</h2>
+  <ul class="feature-row">
+    <li>
+      <i class="fas fa-file-upload"></i>
+      <h3>Get Paid to Print</h3>
+      <p>Print parts for others and earn doing what you love.</p>
+    </li>
+    <li>
+      <i class="fas fa-globe"></i>
+      <h3>Find Local & Global Printers</h3>
+      <p>Choose from verified nearby printers or ship from anywhere in the world.</p>
+    </li>
+    <li>
+      <i class="fas fa-users"></i>
+      <h3>Connect with Makers</h3>
+      <p>Join a network of skilled designers and enthusiasts worldwide.</p>
+    </li>
+  </ul>
+</section>
+
+
+    <footer>
+      <p>&copy; 2025 Z-Hop</p>
+    </footer>
+  </main>
+  <script>
+const form = document.getElementById('waitlist-form');
+const result = document.getElementById('success-message');
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const formData = new FormData(form);
+  const object = Object.fromEntries(formData);
+  const json = JSON.stringify(object);
+  //result.innerHTML = "Please wait..."
+
+    fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: json
+        })
+        .then(async (response) => {
+            let json = await response.json();
+            if (response.status == 200) {
+                result.classList.remove('hidden');
+            } else {
+                return
+            }
+        })
+        .catch(error => {
+            
+        })
+        .then(function() {
+            form.reset();
+            setTimeout(() => {
+                result.classList.add('hidden');
+            }, 3000);
+        });
+});
+
+  </script>
+</body>
+</html>
