@@ -75,10 +75,6 @@ button {
   transition: background 0.3s;
 }
 
-button:hover {
-  background-color: #005fcc;
-}
-
 #success-message {
   margin-top: 1rem;
   color: #90ee90;
@@ -125,7 +121,7 @@ footer {
   list-style: none;
   padding: 0;
   margin: 0;
-  flex-wrap: wrap; /* makes it responsive on small screens */
+  flex-wrap: wrap; 
 }
 
 .feature-row li {
